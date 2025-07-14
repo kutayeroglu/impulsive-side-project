@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown Timer</title>
+    <title>Countdown Timers</title>
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter -->
@@ -16,101 +15,157 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-
         /* Style for the time unit boxes for a consistent width */
         .time-box {
-            min-width: 140px;
+            min-width: 120px; /* Adjusted for better fit on smaller screens */
         }
     </style>
 </head>
-
 <body class="bg-gray-900 text-white flex items-center justify-center min-h-screen p-4">
 
-    <div class="text-center">
-        <h1 class="text-4xl md:text-6xl font-bold mb-4 text-gray-300">Time Remaining</h1>
-        <p class="text-lg md:text-xl text-gray-400 mb-12">Until 16 July 2025, 21:25</p>
+    <div class="text-center w-full max-w-5xl">
+        <!-- Main Timer -->
+        <div class="mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2 text-gray-300">Time Remaining</h1>
+            <p class="text-lg md:text-xl text-gray-400 mb-8">Until 16 July 2025, 21:25</p>
 
-        <!-- Countdown Display -->
-        <div id="countdown" class="flex flex-wrap justify-center items-center gap-4 md:gap-8">
-            <!-- Days -->
-            <div class="time-box bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg flex flex-col items-center">
-                <span id="days" class="text-5xl md:text-7xl font-black text-cyan-400 tabular-nums">0</span>
-                <span class="text-sm md:text-lg font-bold text-gray-400 mt-2">Days</span>
+            <!-- Countdown Display 1 -->
+            <div id="countdown-1" class="flex flex-wrap justify-center items-center gap-4 md:gap-6">
+                <!-- Days -->
+                <div class="time-box bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg flex flex-col items-center">
+                    <span id="days-1" class="text-5xl md:text-7xl font-black text-cyan-400 tabular-nums">0</span>
+                    <span class="text-sm md:text-lg font-bold text-gray-400 mt-2">Days</span>
+                </div>
+                <!-- Hours -->
+                <div class="time-box bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg flex flex-col items-center">
+                    <span id="hours-1" class="text-5xl md:text-7xl font-black text-cyan-400 tabular-nums">0</span>
+                    <span class="text-sm md:text-lg font-bold text-gray-400 mt-2">Hours</span>
+                </div>
+                <!-- Minutes -->
+                <div class="time-box bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg flex flex-col items-center">
+                    <span id="minutes-1" class="text-5xl md:text-7xl font-black text-cyan-400 tabular-nums">0</span>
+                    <span class="text-sm md:text-lg font-bold text-gray-400 mt-2">Minutes</span>
+                </div>
+                <!-- Seconds -->
+                <div class="time-box bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg flex flex-col items-center">
+                    <span id="seconds-1" class="text-5xl md:text-7xl font-black text-cyan-400 tabular-nums">0</span>
+                    <span class="text-sm md:text-lg font-bold text-gray-400 mt-2">Seconds</span>
+                </div>
             </div>
-            <!-- Hours -->
-            <div class="time-box bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg flex flex-col items-center">
-                <span id="hours" class="text-5xl md:text-7xl font-black text-cyan-400 tabular-nums">0</span>
-                <span class="text-sm md:text-lg font-bold text-gray-400 mt-2">Hours</span>
-            </div>
-            <!-- Minutes -->
-            <div class="time-box bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg flex flex-col items-center">
-                <span id="minutes" class="text-5xl md:text-7xl font-black text-cyan-400 tabular-nums">0</span>
-                <span class="text-sm md:text-lg font-bold text-gray-400 mt-2">Minutes</span>
-            </div>
-            <!-- Seconds -->
-            <div class="time-box bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg flex flex-col items-center">
-                <span id="seconds" class="text-5xl md:text-7xl font-black text-cyan-400 tabular-nums">0</span>
-                <span class="text-sm md:text-lg font-bold text-gray-400 mt-2">Seconds</span>
+            <!-- Finished State Message 1 -->
+            <div id="finished-message-1" class="hidden text-center mt-12">
+                <h2 class="text-4xl md:text-6xl font-bold text-cyan-400">The time has come!</h2>
             </div>
         </div>
 
-        <!-- Finished State Message -->
-        <div id="finished-message" class="hidden text-center mt-12">
-            <h2 class="text-4xl md:text-6xl font-bold text-cyan-400">The time has come!</h2>
+        <!-- Divider -->
+        <hr class="border-gray-700 w-1/2 mx-auto mb-16">
+
+        <!-- Second Timer -->
+        <div>
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 text-amber-400">Excluding Wednesday</h2>
+            
+            <!-- Countdown Display 2 -->
+            <div id="countdown-2" class="flex flex-wrap justify-center items-center gap-4 md:gap-6">
+                <!-- Days -->
+                <div class="time-box bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg flex flex-col items-center">
+                    <span id="days-2" class="text-5xl md:text-7xl font-black text-amber-400 tabular-nums">0</span>
+                    <span class="text-sm md:text-lg font-bold text-gray-400 mt-2">Days</span>
+                </div>
+                <!-- Hours -->
+                <div class="time-box bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg flex flex-col items-center">
+                    <span id="hours-2" class="text-5xl md:text-7xl font-black text-amber-400 tabular-nums">0</span>
+                    <span class="text-sm md:text-lg font-bold text-gray-400 mt-2">Hours</span>
+                </div>
+                <!-- Minutes -->
+                <div class="time-box bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg flex flex-col items-center">
+                    <span id="minutes-2" class="text-5xl md:text-7xl font-black text-amber-400 tabular-nums">0</span>
+                    <span class="text-sm md:text-lg font-bold text-gray-400 mt-2">Minutes</span>
+                </div>
+                <!-- Seconds -->
+                <div class="time-box bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg flex flex-col items-center">
+                    <span id="seconds-2" class="text-5xl md:text-7xl font-black text-amber-400 tabular-nums">0</span>
+                    <span class="text-sm md:text-lg font-bold text-gray-400 mt-2">Seconds</span>
+                </div>
+            </div>
+             <!-- Finished State Message 2 -->
+            <div id="finished-message-2" class="hidden text-center mt-12">
+                <h2 class="text-4xl md:text-6xl font-bold text-amber-400">The time has come!</h2>
+            </div>
         </div>
     </div>
 
     <script>
         // --- CONFIGURATION ---
-        // Set the target date and time.
-        // Format: YYYY-MM-DDTHH:MM:SS
-        const targetDate = new Date('2025-07-16T21:25:00').getTime();
+        // Set the target date for the first timer.
+        const targetDate1 = new Date('2025-07-16T21:25:00').getTime();
+        // Set the target date for the second timer (one day less).
+        const oneDayInMs = 24 * 60 * 60 * 1000;
+        const targetDate2 = targetDate1 - oneDayInMs;
 
-        // --- DOM ELEMENT REFERENCES ---
-        const daysEl = document.getElementById('days');
-        const hoursEl = document.getElementById('hours');
-        const minutesEl = document.getElementById('minutes');
-        const secondsEl = document.getElementById('seconds');
-        const countdownEl = document.getElementById('countdown');
-        const finishedMessageEl = document.getElementById('finished-message');
+        // --- DOM ELEMENT REFERENCES for TIMER 1 ---
+        const daysEl1 = document.getElementById('days-1');
+        const hoursEl1 = document.getElementById('hours-1');
+        const minutesEl1 = document.getElementById('minutes-1');
+        const secondsEl1 = document.getElementById('seconds-1');
+        const countdownEl1 = document.getElementById('countdown-1');
+        const finishedMessageEl1 = document.getElementById('finished-message-1');
+
+        // --- DOM ELEMENT REFERENCES for TIMER 2 ---
+        const daysEl2 = document.getElementById('days-2');
+        const hoursEl2 = document.getElementById('hours-2');
+        const minutesEl2 = document.getElementById('minutes-2');
+        const secondsEl2 = document.getElementById('seconds-2');
+        const countdownEl2 = document.getElementById('countdown-2');
+        const finishedMessageEl2 = document.getElementById('finished-message-2');
 
         // --- COUNTDOWN LOGIC ---
-        // Update the countdown every 1 second.
+        // Update the countdowns every 1 second.
         const countdownInterval = setInterval(() => {
-            // Get the current time
             const now = new Date().getTime();
 
-            // Calculate the time remaining
-            const timeRemaining = targetDate - now;
+            // --- Update Timer 1 ---
+            const timeRemaining1 = targetDate1 - now;
+            if (timeRemaining1 > 0) {
+                const days = Math.floor(timeRemaining1 / oneDayInMs);
+                const hours = Math.floor((timeRemaining1 % oneDayInMs) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining1 % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining1 % (1000 * 60)) / 1000);
 
-            // Check if the countdown has finished
-            if (timeRemaining < 0) {
-                clearInterval(countdownInterval);
-                // Hide the countdown timer
-                countdownEl.style.display = 'none';
-                // Show the finished message
-                finishedMessageEl.classList.remove('hidden');
-                return; // Stop the function
+                daysEl1.innerText = String(days);
+                hoursEl1.innerText = String(hours).padStart(2, '0');
+                minutesEl1.innerText = String(minutes).padStart(2, '0');
+                secondsEl1.innerText = String(seconds).padStart(2, '0');
+            } else {
+                countdownEl1.style.display = 'none';
+                finishedMessageEl1.classList.remove('hidden');
             }
 
-            // Calculate days, hours, minutes, and seconds
-            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            // --- Update Timer 2 ---
+            const timeRemaining2 = targetDate2 - now;
+             if (timeRemaining2 > 0) {
+                const days = Math.floor(timeRemaining2 / oneDayInMs);
+                const hours = Math.floor((timeRemaining2 % oneDayInMs) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining2 % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining2 % (1000 * 60)) / 1000);
 
-            // Update the HTML with the new values
-            // padStart ensures the number has a leading zero if it's less than 10
-            daysEl.innerText = String(days);
-            hoursEl.innerText = String(hours).padStart(2, '0');
-            minutesEl.innerText = String(minutes).padStart(2, '0');
-            secondsEl.innerText = String(seconds).padStart(2, '0');
+                daysEl2.innerText = String(days);
+                hoursEl2.innerText = String(hours).padStart(2, '0');
+                minutesEl2.innerText = String(minutes).padStart(2, '0');
+                secondsEl2.innerText = String(seconds).padStart(2, '0');
+            } else {
+                countdownEl2.style.display = 'none';
+                finishedMessageEl2.classList.remove('hidden');
+            }
+            
+            // --- Stop the interval if both timers are finished ---
+            if (timeRemaining1 < 0 && timeRemaining2 < 0) {
+                clearInterval(countdownInterval);
+            }
 
         }, 1000); // Update every second
 
     </script>
 
-
 </body>
-
 </html>
