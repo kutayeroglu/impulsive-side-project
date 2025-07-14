@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to apply the Inter font */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Style for the time unit boxes for a consistent width */
+        .time-box {
+            min-width: 140px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen p-4">
+
+    <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 text-gray-300">Time Remaining</h1>
+        <p class="text-lg md:text-xl text-gray-400 mb-12">Until 16 July 2025, 21:25</p>
+
+        <!-- Countdown Display -->
+        <div id="countdown" class="flex flex-wrap justify-center items-center gap-4 md:gap-8">
+            <!-- Days -->
+            <div class="time-box bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg flex flex-col items-center">
+                <span id="days" class="text-5xl md:text-7xl font-black text-cyan-400 tabular-nums">0</span>
+                <span class="text-sm md:text-lg font-bold text-gray-400 mt-2">Days</span>
+            </div>
+            <!-- Hours -->
+            <div class="time-box bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg flex flex-col items-center">
+                <span id="hours" class="text-5xl md:text-7xl font-black text-cyan-400 tabular-nums">0</span>
+                <span class="text-sm md:text-lg font-bold text-gray-400 mt-2">Hours</span>
+            </div>
+            <!-- Minutes -->
+            <div class="time-box bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg flex flex-col items-center">
+                <span id="minutes" class="text-5xl md:text-7xl font-black text-cyan-400 tabular-nums">0</span>
+                <span class="text-sm md:text-lg font-bold text-gray-400 mt-2">Minutes</span>
+            </div>
+            <!-- Seconds -->
+            <div class="time-box bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg flex flex-col items-center">
+                <span id="seconds" class="text-5xl md:text-7xl font-black text-cyan-400 tabular-nums">0</span>
+                <span class="text-sm md:text-lg font-bold text-gray-400 mt-2">Seconds</span>
+            </div>
+        </div>
+
+        <!-- Finished State Message -->
+        <div id="finished-message" class="hidden text-center mt-12">
+            <h2 class="text-4xl md:text-6xl font-bold text-cyan-400">The time has come!</h2>
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        // Set the target date and time.
+        // Format: YYYY-MM-DDTHH:MM:SS
+        const targetDate = new Date('2025-07-16T21:25:00').getTime();
+
+        // --- DOM ELEMENT REFERENCES ---
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        const countdownEl = document.getElementById('countdown');
+        const finishedMessageEl = document.getElementById('finished-message');
+
+        // --- COUNTDOWN LOGIC ---
+        // Update the countdown every 1 second.
+        const countdownInterval = setInterval(() => {
+            // Get the current time
+            const now = new Date().getTime();
+
+            // Calculate the time remaining
+            const timeRemaining = targetDate - now;
+
+            // Check if the countdown has finished
+            if (timeRemaining < 0) {
+                clearInterval(countdownInterval);
+                // Hide the countdown timer
+                countdownEl.style.display = 'none';
+                // Show the finished message
+                finishedMessageEl.classList.remove('hidden');
+                return; // Stop the function
+            }
+
+            // Calculate days, hours, minutes, and seconds
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            // Update the HTML with the new values
+            // padStart ensures the number has a leading zero if it's less than 10
+            daysEl.innerText = String(days);
+            hoursEl.innerText = String(hours).padStart(2, '0');
+            minutesEl.innerText = String(minutes).padStart(2, '0');
+            secondsEl.innerText = String(seconds).padStart(2, '0');
+
+        }, 1000); // Update every second
+
+    </script>
+
+</body>
+
+</html>
